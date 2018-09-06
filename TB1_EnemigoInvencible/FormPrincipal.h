@@ -45,7 +45,7 @@ namespace TB1_EnemigoInvencible {
 		/// </summary>
 
 		Bitmap^ bmpMapa = gcnew Bitmap("mapa.jpg");
-		Bitmap^ bmpPersonaje = gcnew Bitmap("personaje.jpg");
+		Bitmap^ bmpPersonaje = gcnew Bitmap("personaje.png");
 		CPersonaje *objPersonaje;
 		CEnemigo *objEnemigo;
 
@@ -74,6 +74,7 @@ namespace TB1_EnemigoInvencible {
 			this->Text = L"FormPrincipal";
 			this->Load += gcnew System::EventHandler(this, &FormPrincipal::FormPrincipal_Load);
 			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &FormPrincipal::PresionarTecla);
+			this->KeyUp += gcnew System::Windows::Forms::KeyEventHandler(this, &FormPrincipal::SoltarTecla);
 			this->ResumeLayout(false);
 
 		}
@@ -125,5 +126,8 @@ namespace TB1_EnemigoInvencible {
 
 		}
 	}
-	};
+	private: System::Void SoltarTecla(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e) {
+		objPersonaje->Direccion = Direcciones::Ninguna;
+	}
+};
 }
