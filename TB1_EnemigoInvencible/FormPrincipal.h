@@ -46,6 +46,7 @@ namespace TB1_EnemigoInvencible {
 
 		Bitmap^ bmpMapa = gcnew Bitmap("mapa.jpg");
 		Bitmap^ bmpPersonaje = gcnew Bitmap("personaje.png");
+		Bitmap^ bmpEnemigo = gcnew Bitmap("enemigo.png");
 		CPersonaje *objPersonaje;
 		CEnemigo *objEnemigo;
 
@@ -86,8 +87,10 @@ namespace TB1_EnemigoInvencible {
 
 		System::Drawing::Rectangle elmapa = System::Drawing::Rectangle(0, 0, 960, 640);
 		buffer->Graphics->DrawImage(bmpMapa, 0, 0, elmapa, GraphicsUnit::Pixel);
+		bmpPersonaje->MakeTransparent();
+		bmpEnemigo->MakeTransparent();
 		objPersonaje->Mover(buffer, bmpPersonaje);
-
+		objEnemigo->Mover(buffer, bmpEnemigo,objPersonaje->x, objPersonaje->y,objPersonaje->Ancho, objPersonaje->Largo);
 
 
 

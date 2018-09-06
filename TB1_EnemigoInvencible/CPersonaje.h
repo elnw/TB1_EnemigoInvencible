@@ -40,6 +40,7 @@ public:
 		Rectangle porcionAUsar = Rectangle(Ancho * IndiceX, Largo*IndiceY, Ancho, Largo);
 
 		Rectangle aumento = Rectangle(x, y, Ancho * 1, Largo * 1);
+		
 		buffer->Graphics->DrawImage(bmp, aumento, porcionAUsar, GraphicsUnit::Pixel);
 	}
 
@@ -70,7 +71,7 @@ public:
 
 		case Direcciones::Derecha:
 			IndiceY = 1;
-			if (IndiceX >= 1 && IndiceX < 3)
+			if (IndiceX >= 2 && IndiceX <= 6)
 				IndiceX++;
 			else
 				IndiceX = 1;
