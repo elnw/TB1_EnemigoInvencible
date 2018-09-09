@@ -15,10 +15,11 @@ public:
 	int dy;
 	int IndiceX;
 	int IndiceY;
-	int Ancho;
-	int Largo;
+	double Ancho;
+	double Largo;
 
 	CEnemigo() {
+
 		random_device rd;
 		mt19937  gen(rd());
 
@@ -30,14 +31,17 @@ public:
 		Stamina = dis(gen);
 		IndiceX = 0;
 		IndiceY = 0;
-		Ancho = 63;
-		Largo = 83;
+		//Ancho = 73;
+		//Largo = 87;
 		X = 200;
 		Y = 300;
 	}
 
 	void Dibujar(BufferedGraphics ^buffer, Bitmap ^bmp)
 	{
+		Ancho = bmp->Width / 4;
+		Largo = bmp->Height / 4;
+
 		Rectangle porcionAUsar = Rectangle(Ancho * IndiceX, Largo*IndiceY, Ancho, Largo);
 
 		Rectangle aumento = Rectangle(X, Y, Ancho * 1, Largo * 1);
@@ -46,24 +50,26 @@ public:
 
 	void Mover(BufferedGraphics ^buffer, Bitmap ^bmp, int xJugador, int yJugador, int AnchoJ, int LargoJ)
 	{
+		Ancho = bmp->Width / 4;
+		Largo = bmp->Height / 4;
+		if (IndiceX >= 0 && IndiceX < 3) {
+			IndiceX++;
+		}
+		else {
+			IndiceX = 0;
+		}
+
+
 		if (xJugador+AnchoJ < X ) {
+			//Jugador izquierda, enemigo izquierda
 			dx = -1*10;
-			IndiceY = 2;
-			if (IndiceX >= 0 && IndiceX <= 3) {
-				IndiceX++;
-			}
-			else {
-				IndiceX = 0;
-			}
+			IndiceY = 1;
+			
 		}
 		if (yJugador+LargoJ < Y) {
-			IndiceY = 4;
-			if (IndiceX >= 0 && IndiceX <= 5) {
-				IndiceX++;
-			}
-			else {
-				IndiceX = 0;
-			}
+			//jugador arriba, enemigo arriba
+			IndiceY = 3;
+			
 
 			dy = -1 * 10;
 		}
@@ -74,17 +80,16 @@ public:
 			dy = 0 * 10;
 		}
 		if (xJugador > X+Ancho) {
+			//jugador derecha, enemigo derecha
+			IndiceY = 2;
+			
 			dx = 1 * 10;
 		}
 		if (yJugador > Y+Ancho) {
+			//enemigo baja
 			IndiceY = 0;
 
-			if (IndiceX >= 0 && IndiceX <= 3) {
-				IndiceX++;
-			}
-			else {
-				IndiceX = 0;
-			}
+			
 
 			dy = 1 * 10;
 		}
